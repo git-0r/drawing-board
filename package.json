@@ -7,8 +7,7 @@
     "start": "webpack serve --mode development --open --hot",
     "build": "webpack --mode production",
     "serve": "webpack serve --mode production --open",
-    "lint": "eslint \"./src/**/*.{ts,tsx}\"",
-    "lint-staged": "eslint \"./src/**/*.{ts,tsx}\""
+    "lint": "eslint \"./src/**/*.{ts,tsx}\""
   },
   "eslintConfig": {
     "extends": [
@@ -20,6 +19,12 @@
     "hooks": {
       "pre-commit": "npm run lint-staged"
     }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -39,7 +44,6 @@
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.0",

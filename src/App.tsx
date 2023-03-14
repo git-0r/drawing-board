@@ -1,5 +1,5 @@
-const App: React.FC = () => {
-  return <div>React app!</div>;
-};
+import { FC } from 'react';
+
+const App: FC = () => <div>React app!</div>;
 
 export default App;
