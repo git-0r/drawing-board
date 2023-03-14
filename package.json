@@ -7,7 +7,8 @@
     "start": "webpack serve --mode development --open --hot",
     "build": "webpack --mode production",
     "serve": "webpack serve --mode production --open",
-    "lint": "eslint \"./src/**/*.{ts,tsx}\""
+    "lint": "eslint \"./src/**/*.{ts,tsx}\"",
+    "lint-staged": "eslint \"./src/**/*.{ts,tsx}\""
   },
   "eslintConfig": {
     "extends": [
@@ -17,7 +18,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run lint-staged"
     }
   },
   "keywords": [],
@@ -43,6 +44,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
     "mini-css-extract-plugin": "^2.7.3",
     "prettier": "^2.8.4",
     "swc-loader": "^0.2.3",
