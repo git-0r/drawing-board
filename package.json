@@ -7,24 +7,16 @@
     "start": "webpack serve --mode development --open --hot",
     "build": "webpack --mode production",
     "serve": "webpack serve --mode production --open",
-    "lint": "eslint \"./src/**/*.{ts,tsx}\""
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "lint": "eslint \"./src/**/*.{ts,tsx}\"",
+    "precommit": "tsc --noEmit && lint-staged"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint-staged"
+      "pre-commit": "npm run precommit"
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "eslint --fix",
-      "git add"
-    ]
+    "*.{ts,tsx}": "ts-node --files ./node_modules/eslint/bin/eslint.js --max-warnings 0"
   },
   "keywords": [],
   "author": "",
@@ -54,6 +46,7 @@
     "prettier": "^2.8.4",
     "swc-loader": "^0.2.3",
     "terser-webpack-plugin": "^5.3.7",
+    "ts-node": "^10.9.1",
     "webpack": "^5.76.1",
     "webpack-bundle-analyzer": "^4.8.0",
     "webpack-cli": "^5.0.1",
