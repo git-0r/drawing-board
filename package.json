@@ -8,15 +8,10 @@
     "build": "webpack --mode production",
     "serve": "webpack serve --mode production --open",
     "lint": "eslint \"./src/**/*.{ts,tsx}\"",
-    "precommit": "tsc --noEmit && lint-staged"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run precommit"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": "ts-node --files ./node_modules/eslint/bin/eslint.js --max-warnings 0"
+    "pf": "prettier --loglevel warn --write \"src/**/*.{ts,tsx}\"",
+    "pc": "prettier --check \"src/**/*.{ts,tsx}\"",
+    "tc": "tsc --pretty --noEmit",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -41,7 +36,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.0",
     "mini-css-extract-plugin": "^2.7.3",
     "prettier": "^2.8.4",
     "swc-loader": "^0.2.3",
