@@ -12,7 +12,7 @@
     "pc": "prettier --check \"src/**/*.{ts,tsx}\"",
     "tc": "tsc --pretty --noEmit",
     "prepare": "husky install",
-    "postinstall": "cd ./node_modules && ls && cd ./fabric && node build.js modules=ALL exclude=gestures,image_filters"
+    "postinstall": "node postinstall.mjs"
   },
   "keywords": [],
   "author": "",
