@@ -12,3 +12,12 @@ exec(
     console.log(`Command output: ${stdout}`);
   }
 );
+
+exec('npm run build', (err, stdout, stderr) => {
+  if (err) {
+    console.error(`Error building drawing board: ${err}`);
+    return;
+  }
+
+  console.log(`Command output: ${stdout}`);
+});
