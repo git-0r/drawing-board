@@ -40,7 +40,7 @@ module.exports = (env, argv) => {
     entry: './src/index.tsx',
     output: {
       path: path.resolve(__dirname, 'build'),
-      filename: '[name].[contenthash].js',
+      filename: '[name].js',
       chunkFilename: '[id].[contenthash].js',
       pathinfo: true,
     },
