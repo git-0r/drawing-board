@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { fabric } from 'fabric';
 
 // Declare a type for the canvas object
@@ -6,13 +6,15 @@ type FabricCanvas = fabric.Canvas | null;
 interface Props {
   canvas: FabricCanvas;
   setCanvas: Dispatch<SetStateAction<FabricCanvas>>;
+  onCanvasUpdate: (canvas: FabricCanvas) => void;
+  controls: boolean;
 }
 
 const canvasID = 'canvas';
 
-const App = ({ canvas, setCanvas }: Props) => {
+const App = ({ canvas, setCanvas, onCanvasUpdate, controls }: Props) => {
   const [tool, setTool] = useState<'Pencil' | 'Eraser'>('Pencil');
-
+  const canvasRef = useRef(null);
   const initCanvas = () => {
     const fabCanvas = new fabric.Canvas(canvasID, {
       backgroundColor: 'white',
@@ -45,24 +47,34 @@ const App = ({ canvas, setCanvas }: Props) => {
   };
 
   useEffect(() => {
-    const canvas = initCanvas();
-    setCanvas(canvas);
+    const newCanvas = initCanvas();
+    newCanvas.on('path:created', () => {
+      // some event
+      onCanvasUpdate(newCanvas);
+    });
+    setCanvas(newCanvas);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCanvas]);
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <button
-        onClick={toggleDraw}
-        style={{ backgroundColor: tool === 'Pencil' ? 'yellow' : 'white' }}
-      >
-        &#9998;
-      </button>
-      <button
-        onClick={toggleEraser}
-        style={{ backgroundColor: tool === 'Eraser' ? 'yellow' : 'white' }}
-      >
-        erase
-      </button>
+      {controls && (
+        <>
+          {' '}
+          <button
+            onClick={toggleDraw}
+            style={{ backgroundColor: tool === 'Pencil' ? 'yellow' : 'white' }}
+          >
+            &#9998;
+          </button>
+          <button
+            onClick={toggleEraser}
+            style={{ backgroundColor: tool === 'Eraser' ? 'yellow' : 'white' }}
+          >
+            erase
+          </button>
+        </>
+      )}
       <div
         className='App'
         style={{
@@ -70,7 +82,11 @@ const App = ({ canvas, setCanvas }: Props) => {
           justifyContent: 'center',
         }}
       >
-        <canvas id={canvasID} style={{ border: '2px solid black' }} />
+        <canvas
+          id={canvasID}
+          style={{ border: '2px solid black' }}
+          ref={canvasRef}
+        />
       </div>
     </div>
   );
