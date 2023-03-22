@@ -39,3 +39,5 @@ echo 'Code looks good to me... Trying to build now.'
 
 # If everything passes... Now we can commit
 echo '✅✅✅✅ Everything is fine... committing this now. ✅✅✅✅'
+
+# Add this to scripts "prepare": "husky install"
